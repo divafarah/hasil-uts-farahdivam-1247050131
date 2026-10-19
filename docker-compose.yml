@@ -1,0 +1,28 @@
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_Diva
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "22131:5432"
+    volumes:
+      - postgres_data_ujian:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin_Diva
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    ports:
+      - "44131:80"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data_ujian:

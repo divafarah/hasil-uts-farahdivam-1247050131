@@ -1,0 +1,10 @@
+
+CREATE SCHEMA IF NOT EXISTS "SALAM";
+
+CREATE TABLE IF NOT EXISTS "SALAM".mahasiswas (
+    nim VARCHAR(20) PRIMARY KEY,
+    nama VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    umur INT CHECK (umur >= 17),
+    jurusan VARCHAR(100) NOT NULL
+);
