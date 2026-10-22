@@ -1,56 +1,79 @@
-/* 1. UJI BACKEND_DEV: CRUD */
 
-/* Jalankan menggunakan koneksi backend_dev */
+-- ============================================
+-- 06_UJI_HAK_AKSES.SQL
+-- Pengujian hak akses setiap role
+-- Schema: SALAM
+-- ============================================
 
+
+-- 1. UJI BACKEND_DEV
+-- Hak akses: SELECT, INSERT, UPDATE, DELETE
+-- Pengujian dilakukan melalui koneksi backend_dev
+
+-- Melihat data mahasiswa
 SELECT * FROM "SALAM".mahasiswas;
 
+-- Menambahkan data pengujian
 INSERT INTO "SALAM".mahasiswas
-(nim, nama, email, umur, jurusan)
+    (nim, nama, email, umur, jurusan)
 VALUES
-('TEST001', 'Mahasiswa Uji', 'test001@example.com', 20, 'Teknik Informatika');
+    ('TEST131', 'Daniel Jaya Wijaya',
+     'danilil234@gmail.com', 20, 'Informatika');
 
+-- Mengubah data pengujian
 UPDATE "SALAM".mahasiswas
-SET nama = 'Mahasiswa Uji Updated'
-WHERE nim = 'TEST001';
+SET nama = 'Daniel Jaya Wijaya Update'
+WHERE nim = 'TEST131';
 
+-- Menghapus data pengujian
 DELETE FROM "SALAM".mahasiswas
-WHERE nim = 'TEST001';
+WHERE nim = 'TEST131';
 
 
-/* 2. UJI BI_DEV: HANYA SELECT */
+-- 2. UJI BI_DEV
+-- Hak akses: SELECT saja
+-- Pengujian dilakukan melalui koneksi bi_dev
 
-/* Jalankan menggunakan koneksi bi_dev */
-
+-- Melihat data mahasiswa (seharusnya berhasil)
 SELECT * FROM "SALAM".mahasiswas;
 
-/* Perintah INSERT berikut harus ditolak oleh PostgreSQL */
-/*
+-- Menguji INSERT (seharusnya ditolak)
 INSERT INTO "SALAM".mahasiswas
-(nim, nama, email, umur, jurusan)
+    (nim, nama, email, umur, jurusan)
 VALUES
-('TEST002', 'Uji BI', 'test002@example.com', 20, 'Teknik Informatika');
-*/
+    ('TESTBI131', 'Tes BI',
+     'tes.bi131@example.com', 20, 'Informatika');
 
+//Melihat data mahasiswa
+SELECT * FROM "SALAM".mahasiswas;
 
-/* 3. UJI DATA_ENGINEER: KELOLA DATA DAN OBJEK */
-
-/* Jalankan menggunakan koneksi data_engineer */
-
+//Menambahkan data pengujian
 INSERT INTO "SALAM".mahasiswas
-(nim, nama, email, umur, jurusan)
+    (nim, nama, email, umur, jurusan)
 VALUES
-('TEST003', 'Mahasiswa Uji Engineer', 'test003@example.com', 20, 'Teknik Informatika');
+    ('TEST131', 'Daniel Jaya Wijaya',
+     'danilil234@gmail.com', 20, 'Informatika');
 
+//Mengubah data pengujian
 UPDATE "SALAM".mahasiswas
-SET nama = 'Mahasiswa Uji Engineer Updated'
-WHERE nim = 'TEST003';
+SET nama = 'Daniel Jaya Wijaya Update'
+WHERE nim = 'TEST131';
 
+//Menghapus data pengujian
 DELETE FROM "SALAM".mahasiswas
-WHERE nim = 'TEST003';
+WHERE nim = 'TEST131';
 
-CREATE TABLE "SALAM".uji_engineer (
+//Membuat tabel pengujian
+CREATE TABLE "SALAM"."danil jaya" (
     id INT PRIMARY KEY,
     keterangan VARCHAR(100)
 );
 
-DROP TABLE "SALAM".uji_engineer;
+//Memeriksa tabel pengujian
+SELECT table_name
+FROM information_schema.tables
+WHERE table_schema = 'SALAM'
+  AND table_name = 'danil jaya';
+
+//Menghapus tabel pengujian
+DROP TABLE "SALAM"."danil jaya";
